@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Render css layout in pixi.js environment",
   "author": "Talha Özdemir",
-  "main": "./lib/index.js",
-  "module": "./lib/index.mjs",
-  "types": "./lib/index.d.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.mjs",
@@ -46,6 +46,15 @@
     "pixi.js": ">=8.0.0"
   },
   "devDependencies": {
-    "pixi.js": "^8.6.4"
+    "pixi.js": "^8.6.4",
+    "@pixi/extension-scripts": "latest"
+  },
+  "extensionConfig": {
+    "namespace": "PIXI.Css",
+    "bundle": "dist/pixi-css.js",
+    "bundleModule": "dist/pixi-css.mjs",
+    "globals": {
+      "lodash": "_"
+    }
   }
 }

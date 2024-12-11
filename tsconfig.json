@@ -1,0 +1,25 @@
+{
+    "extends": "@pixi/extension-scripts/tsconfig",
+    "compilerOptions": {
+        "outDir": "./lib",
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "strict": false,
+        "noImplicitThis": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "preserveConstEnums": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noUncheckedIndexedAccess": true,
+        "skipLibCheck": true,
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*"
+    ]
+}

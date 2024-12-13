@@ -1,4 +1,4 @@
-import { Container, Renderer } from "pixi.js";
+import { Container, Point, Renderer } from "pixi.js";
 
 export class Responsive {
   renderer: Renderer<HTMLCanvasElement>;
@@ -35,24 +35,25 @@ export class Responsive {
   }
 
   private scaleChildWithResizeData(child: Container): void {
+    const orientedData = window.innerWidth > window.innerHeight && child.resizeData?.landscape ? child.resizeData?.landscape : child.resizeData?.portrait;
+
+    if (!orientedData?.scale) return;
+
     const childParent = child.parent as Container;
 
-    if (child.resizeData.portrait.scale.type === "absolute") {
-      child.scale.set(
-        child.resizeData.portrait.scale.x,
-        child.resizeData.portrait.scale.y
-      )
+    if (orientedData.scale.type === "absolute") {
+      child.scale.set(orientedData.scale.x, orientedData.scale.y);
     } else {
       const parentWidth = childParent.baseWidth;
       const parentHeight = childParent.baseHeight;
-      const widthRatio = (parentWidth * child.resizeData.portrait.scale.x) / child.baseWidth;
-      const heightRatio = (parentHeight * child.resizeData.portrait.scale.y) / child.baseHeight;
+      const widthRatio = (parentWidth * orientedData.scale.x) / child.baseWidth;
+      const heightRatio = (parentHeight * orientedData.scale.y) / child.baseHeight;
 
       let scaleX: number;
       let scaleY: number;
-      if (child.resizeData.portrait.scale.fit === "min") {
+      if (orientedData.scale.fit === "min") {
         scaleX = scaleY = Math.min(widthRatio, heightRatio);
-      } else if (child.resizeData.portrait.scale.fit === "max") {
+      } else if (orientedData.scale.fit === "max") {
         scaleX = scaleY = Math.max(widthRatio, heightRatio);
       } else {
         scaleX = widthRatio;
@@ -64,45 +65,48 @@ export class Responsive {
   }
 
   private locateChildWithResizeData(child: Container): void {
+    const orientedData = window.innerWidth > window.innerHeight && child.resizeData?.landscape ? child.resizeData?.landscape : child.resizeData?.portrait;
+
     const childParent = child.parent as Container;
 
-    if (child.resizeData.portrait.location) {
-      const parentWidth = childParent.baseWidth;
-      const parentHeight = childParent.baseHeight;
-      const childWidth = child.baseWidth * child.scale.x;
-      const childHeight = child.baseHeight * child.scale.y;
+    const position = new Point();
+    const parentWidth = childParent.baseWidth;
+    const parentHeight = childParent.baseHeight;
+    const childWidth = child.baseWidth * child.scale.x;
+    const childHeight = child.baseHeight * child.scale.y;
 
-      let x: number;
-      let y: number;
-      if (child.resizeData.portrait.location.x === "left") {
-        x = 0
-      } else if (child.resizeData.portrait.location.x === "center") {
-        x = parentWidth * 0.5;
-      } else {
-        x = parentWidth;
+    if (orientedData?.location) {
+      if (orientedData.location?.x === "left") {
+        position.x = 0;
+      } else if (orientedData.location?.x === "center") {
+        position.x = parentWidth * 0.5;
+      } else if (orientedData.location?.x === "right") {
+        position.x = parentWidth;
       }
 
-      if (child.resizeData.portrait.location.y === "top") {
-        y = 0
-      } else if (child.resizeData.portrait.location.y === "center") {
-        y = parentHeight * 0.5;
-      } else {
-        y = parentHeight;
+      if (orientedData.location?.y === "top") {
+        position.y = 0;
+      } else if (orientedData.location?.y === "center") {
+        position.y = parentHeight * 0.5;
+      } else if (orientedData.location?.y === "bottom") {
+        position.y = parentHeight;
       }
-
-      if (child.resizeData.portrait.offset.unit === "px") {
-        x += child.resizeData.portrait.offset.x;
-        y += child.resizeData.portrait.offset.y;
-      } else if (child.resizeData.portrait.offset.unit === "pct") {
-        x += parentWidth * child.resizeData.portrait.offset.x;
-        y += parentHeight * child.resizeData.portrait.offset.y;
-      } else {
-        x += childWidth * child.resizeData.portrait.offset.x;
-        y += childHeight * child.resizeData.portrait.offset.y;
-      }
-
-      child.position.set(x, y);
     }
+
+    if (orientedData?.offset) {
+      if (orientedData.offset?.unit === "px") {
+        position.x += orientedData.offset.x;
+        position.y += orientedData.offset.y;
+      } else if (orientedData.offset?.unit === "pct") {
+        position.x += parentWidth * orientedData.offset.x;
+        position.y += parentHeight * orientedData.offset.y;
+      } else if (orientedData.offset?.unit === "self") {
+        position.x += childWidth * orientedData.offset.x;
+        position.y += childHeight * orientedData.offset.y;
+      }
+    }
+
+    child.position.set(position.x, position.y);
   }
 
   private getAllChildren(container: Container): Container[] {

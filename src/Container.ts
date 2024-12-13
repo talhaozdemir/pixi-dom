@@ -1,7 +1,7 @@
-import { Container, Graphics } from "pixi.js";
+import * as PIXI from "pixi.js";
 import { HTMLContainerConfig } from "../global";
 
-export class HTMLContainer extends Container {
+export class Container extends PIXI.Container {
   rootDiv: HTMLDivElement;
   _htmlContent: string;
   _cssContent: string;
@@ -21,7 +21,7 @@ export class HTMLContainer extends Container {
     super();
 
     this._debug = config.debug;
-    
+
     // Remove all newlines and extra spaces from the HTML and CSS content
     this._htmlContent = config.htmlContent.replace(/\n/g, "").replace(/\s{2,}/g, "");
     this._cssContent = config.cssContent.replace(/\n/g, "").replace(/\s{2,}/g, "");
@@ -62,7 +62,7 @@ export class HTMLContainer extends Container {
     let debugGraphics = null;
 
     if (this._debug?.enabled) {
-      debugGraphics = new Graphics();
+      debugGraphics = new PIXI.Graphics();
       this.addChildAt(debugGraphics, 0);
     }
 
@@ -77,7 +77,7 @@ export class HTMLContainer extends Container {
     }
 
     this.htmlChildren.forEach((child, i) => {
-      const wrapper = new Container();
+      const wrapper = new PIXI.Container();
 
       this.addChild(wrapper);
       wrapper.label = child.id || child.className || `Element_${i}`;
@@ -116,7 +116,7 @@ export class HTMLContainer extends Container {
     }
   }
 
-  getWrapperByLabel(label: string): Container | undefined {
+  getElementByLabel(label: string): PIXI.Container | undefined {
     return this.children.find((child) => child.label === label);
   }
 

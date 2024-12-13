@@ -9,5 +9,5 @@
 
 // import { HTMLContainer } from "./HtmlContainer";
 
-export * from "./HTMLContainer";
+export * from "./Container";
 export * from "./Responsive";

@@ -1,10 +1,10 @@
 import "../src/index";
-import { HTMLContainer } from "../src/index";
+import { Container } from "../src/index";
 
 describe("HTMLContainer", () => {
   describe("initializeRootDiv", () => {
     it("should be added to prototype", () => {
-      const htmlContainer = new HTMLContainer({
+      const htmlContainer = new Container({
         debug: {
           enabled: false,
           color1: 0xffffff,

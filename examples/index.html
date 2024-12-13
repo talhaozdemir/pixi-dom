@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PIXI CSS</title>
+    <title>PIXI DOM</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
@@ -28,13 +28,13 @@
 
   <body>
     <script src="https://pixijs.download/dev/pixi.min.js"></script>
-    <script src="../dist/pixi-css.js"></script>
+    <script src="../dist/pixi-dom.js"></script>
     <script type="module">
       const app = new PIXI.Application();
       await app.init({ width: 800, height: 800, preference: "webgl" });
       document.body.appendChild(app.canvas);
 
-      const htmlCont = new PIXI.CSS.HTMLContainer({
+      const htmlCont = new PIXI.DOM.Container({
         debug: {
           enabled: true,
           color1: 0x92b7d1,
@@ -64,7 +64,7 @@
       htmlCont.rootDiv.style.zIndex = -1;
       console.log(htmlCont);
 
-      const hudWrapper = htmlCont.getWrapperByLabel("gameArea");
+      const hudWrapper = htmlCont.getElementByLabel("gameArea");
 
       const bunnyTexture = await PIXI.Assets.load("https://pixijs.com/assets/bunny.png");
 
@@ -127,7 +127,7 @@
       //     sprite.angle = Math.cos(elapsed / 50.0) * 100.0;
       //   });
 
-      new PIXI.CSS.Responsive(app.renderer, app.stage);
+      new PIXI.DOM.Responsive(app.renderer, app.stage);
     </script>
   </body>
 </html>

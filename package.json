@@ -1,7 +1,7 @@
 {
-  "name": "@pixi/css",
+  "name": "@pixi/dom",
   "version": "0.0.1",
-  "description": "Render css layout in pixi.js environment",
+  "description": "Reference DOM elements in PixiJS",
   "author": "Talha Özdemir",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
@@ -50,9 +50,9 @@
     "@pixi/extension-scripts": "latest"
   },
   "extensionConfig": {
-    "namespace": "PIXI.CSS",
-    "bundle": "dist/pixi-css.js",
-    "bundleModule": "dist/pixi-css.mjs",
+    "namespace": "PIXI.DOM",
+    "bundle": "dist/pixi-dom.js",
+    "bundleModule": "dist/pixi-dom.mjs",
     "globals": {
       "lodash": "_"
     }

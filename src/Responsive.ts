@@ -75,20 +75,20 @@ export class Responsive {
     const childWidth = child.baseWidth * child.scale.x;
     const childHeight = child.baseHeight * child.scale.y;
 
-    if (orientedData?.location) {
-      if (orientedData.location?.x === "left") {
+    if (orientedData?.align) {
+      if (orientedData.align?.x === "left") {
         position.x = 0;
-      } else if (orientedData.location?.x === "center") {
+      } else if (orientedData.align?.x === "center") {
         position.x = parentWidth * 0.5;
-      } else if (orientedData.location?.x === "right") {
+      } else if (orientedData.align?.x === "right") {
         position.x = parentWidth;
       }
 
-      if (orientedData.location?.y === "top") {
+      if (orientedData.align?.y === "top") {
         position.y = 0;
-      } else if (orientedData.location?.y === "center") {
+      } else if (orientedData.align?.y === "center") {
         position.y = parentHeight * 0.5;
-      } else if (orientedData.location?.y === "bottom") {
+      } else if (orientedData.align?.y === "bottom") {
         position.y = parentHeight;
       }
     }

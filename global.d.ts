@@ -23,7 +23,7 @@ export type ResizeData = {
 };
 
 export type PortraitResizeData = {
-  location?: {
+  align?: {
     x: "left" | "center" | "right";
     y: "top" | "center" | "bottom";
   };
@@ -41,7 +41,7 @@ export type PortraitResizeData = {
 };
 
 export type LandscapeResizeData = {
-  location?: {
+  align?: {
     x: "left" | "center" | "right";
     y: "top" | "center" | "bottom";
   };
@@ -68,4 +68,4 @@ export type HTMLContainerConfig = {
   cssContent: string;
 };
 
-export {};
+export { };

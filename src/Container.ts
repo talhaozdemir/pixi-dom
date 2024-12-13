@@ -12,10 +12,10 @@ export class Container extends PIXI.Container {
     color1: number;
     color2: number;
   } = {
-    enabled: false,
-    color1: 0x92b7d1,
-    color2: 0x2d86c4,
-  };
+      enabled: false,
+      color1: 0x92b7d1,
+      color2: 0x2d86c4,
+    };
 
   constructor(config: HTMLContainerConfig) {
     super();
@@ -111,6 +111,9 @@ export class Container extends PIXI.Container {
   collectHtmlChildren(parent: HTMLElement) {
     for (let i = 0; i < parent.children.length; i++) {
       const child = parent.children[i] as HTMLElement;
+      if (child.tagName !== "DIV") {
+        continue;
+      }
       this.htmlChildren.push(child);
       this.collectHtmlChildren(child);
     }

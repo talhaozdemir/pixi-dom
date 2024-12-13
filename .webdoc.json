@@ -1,0 +1,45 @@
+{
+    "tags": {
+      "allowUnknownTags": false
+    },
+    "source": {
+      "include": [
+        "src/**/*.ts"
+      ]
+    },
+    "plugins": [
+      "plugins/markdown"
+    ],
+    "template": {
+      "readme": "./README.md",
+      "repository": "https://github.com/pixijs/extension-boilerplate.git"
+    },
+    "templates": {
+      "cleverLinks": false,
+      "monospaceLinks": false,
+      "default": {
+        "outputSourceFiles": false
+      },
+      "applicationName": "@pixi/dom",
+      "copyright": "&copy; Copyright 2024 Talha Özdemir",
+      "googleAnalytics": "",
+      "linenums": false,
+      "meta": {
+        "title": "@pixi/dom",
+        "description": "Reference DOM elements in PixiJS",
+        "keyword": ""
+      }
+    },
+    "markdown": {
+      "parser": "gfm",
+      "hardwrap": false
+    },
+    "opts": {
+      "encoding": "utf8",
+      "recurse": true,
+      "private": false,
+      "lenient": true,
+      "destination": "docs",
+      "template": "@pixi/webdoc-template"
+    }
+  }

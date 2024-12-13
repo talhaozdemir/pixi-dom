@@ -10,8 +10,8 @@ describe("HTMLContainer", () => {
           color1: 0xffffff,
           color2: 0xff0000,
         },
-        htmlContent: "<div></div>",
-        cssContent: "div { color: red; }",
+        html: "<div></div>",
+        css: "div { width: 100px; height: 100px; }",
       });
 
       expect("initializeRootDiv" in htmlContainer).toBe(true);

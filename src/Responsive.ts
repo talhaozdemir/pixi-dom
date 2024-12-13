@@ -11,7 +11,7 @@ export class Responsive {
     this.resize();
   }
 
-  resize(): void {
+  public resize(): void {
     const width: number = window.innerWidth;
     const height: number = window.innerHeight;
 
@@ -19,20 +19,24 @@ export class Responsive {
     this.stage.baseWidth = width;
     this.stage.baseHeight = height;
 
-    const allChildren = this.getAllChildren(this.stage);
-    for (let i = 0; i < allChildren.length; i++) {
-      const child = allChildren[i];
+    this.getAllChildren(this.stage).forEach((child) => {
       const childParent = child.parent as Container;
 
-      if (childParent) {
-        if (child.resizeData) {
-          this.scaleChildWithResizeData(child);
-          this.locateChildWithResizeData(child);
-        }
-        if (child.resize) child.resize(childParent.baseWidth, childParent.baseHeight);
+      if (!childParent) return;
+
+      if (!child.resize) {
+        child.resize = () => this.applyResizeData(child);
       }
-    }
+
+      child.resize(childParent.baseWidth, childParent.baseHeight);
+    });
   }
+
+  private applyResizeData(child: any): void {
+    this.scaleChildWithResizeData(child);
+    this.locateChildWithResizeData(child);
+  }
+
 
   private scaleChildWithResizeData(child: Container): void {
     const orientedData = window.innerWidth > window.innerHeight && child.resizeData?.landscape ? child.resizeData?.landscape : child.resizeData?.portrait;

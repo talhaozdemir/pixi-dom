@@ -18,29 +18,11 @@ declare global {
 }
 
 export type ResizeData = {
-  portrait: PortraitResizeData;
-  landscape?: LandscapeResizeData;
+  portrait: ResizeDataProps;
+  landscape?: ResizeDataProps;
 };
 
-export type PortraitResizeData = {
-  align?: {
-    x: "left" | "center" | "right";
-    y: "top" | "center" | "bottom";
-  };
-  offset?: {
-    unit: "px" | "pct" | "self";
-    x: number;
-    y: number;
-  };
-  scale?: {
-    type: "absolute" | "relative";
-    fit: "min" | "max" | "stretch";
-    x: number;
-    y: number;
-  };
-};
-
-export type LandscapeResizeData = {
+export type ResizeDataProps = {
   align?: {
     x: "left" | "center" | "right";
     y: "top" | "center" | "bottom";
@@ -64,8 +46,8 @@ export type HTMLContainerConfig = {
     color1: number;
     color2: number;
   };
-  htmlContent: string;
-  cssContent: string;
+  html: string;
+  css: string;
 };
 
 export { };

@@ -1,6 +1,6 @@
 {
   "name": "@pixi/dom",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Reference DOM elements in PixiJS",
   "author": "Talha Özdemir",
   "main": "lib/index.js",

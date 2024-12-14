@@ -1,7 +1,7 @@
 {
-  "name": "@pixi/dom",
-  "version": "0.0.1",
-  "description": "Reference DOM elements in PixiJS",
+  "name": "pixi-dom",
+  "version": "1.0.0",
+  "description": "Utilizing the layout of DOM elements",
   "author": "Talha Özdemir",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
@@ -50,7 +50,7 @@
     "@pixi/extension-scripts": "latest"
   },
   "extensionConfig": {
-    "namespace": "PIXI.DOM",
+    "namespace": "PixiDOM",
     "bundle": "dist/pixi-dom.js",
     "bundleModule": "dist/pixi-dom.mjs",
     "globals": {

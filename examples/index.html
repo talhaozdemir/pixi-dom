@@ -30,7 +30,7 @@
 
     // The plugin only needs HTML and CSS data! For example, a grid layout can be prepared and passed as prop.
     // Then Pixi Container gameobjects are prepared for each child of html data.
-    const htmlCont = new PIXI.DOM.Container({
+    const htmlCont = new PixiDOM.Container({
       debug: {
         enabled: true,
         color1: 0x92b7d1,
@@ -225,7 +225,7 @@
 
 
     // Responsive class is responsible for handling resize operations when each resize event occurs.
-    new PIXI.DOM.Responsive(renderer, stage);
+    new PixiDOM.Responsive(renderer, stage);
   </script>
 </body>
 

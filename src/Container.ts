@@ -1,12 +1,6 @@
 import * as PIXI from "pixi.js";
 import { HTMLContainerConfig } from "../global";
 
-/**
- * Global PixiJS namespace.
- * @namespace PIXI
- * @see https://pixijs.download/release/docs/index.html
- */
-
 export class Container extends PIXI.Container {
 
   /**
@@ -172,15 +166,6 @@ export class Container extends PIXI.Container {
       this.htmlElements.push(child);
       this.collectHtmlElements(child);
     }
-  }
-
-  /**
-   * Returns the PIXI.Container object that has the same label as the input.
-   * @param {string} label - The label of the Container object.
-   * @returns {PIXI.Container | undefined} - The PIXI.Container object that has the same label as the input.
-   */
-  public getElementByLabel(label: string): PIXI.Container | undefined {
-    return this.children.find((child) => child.label === label);
   }
 
   /**

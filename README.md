@@ -26,6 +26,7 @@ Include the following script files in your project:
 
 ```js
 import * as PixiDOM from "./pixi-dom.js"
+// import { Container, Responsive } from "./pixi-dom"
 ```
 
 Ensure that the `pixi-dom.js` file is located in the correct path relative to your project directory.

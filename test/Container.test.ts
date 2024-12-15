@@ -1,5 +1,4 @@
-import "../src/index";
-import { Container } from "../src/index";
+import { Container } from "pixi-dom";
 
 describe("HTMLContainer", () => {
   describe("initializeRootDiv", () => {

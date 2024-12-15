@@ -1,6 +1,6 @@
 # PIXI DOM Plugin
 
-[LIVE DEMO](https://pixi-dom.web.app/)
+<a href="https://pixi-dom.web.app/" target="_blank">LIVE DEMO</a>
 
 The **PIXI DOM Plugin** is a powerful utility designed for developers who want to create responsive and dynamic layouts in PixiJS using HTML and CSS. By integrating DOM layout strategies directly into the PixiJS rendering pipeline, this plugin allows for seamless use of grid systems, alignment, scaling, and responsive design features within a PixiJS stage.
 

@@ -1,6 +1,6 @@
 {
   "name": "pixi-responsive",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Responsive plugin for PixiJS",
   "author": "Talha Özdemir",
   "main": "lib/index.js",
@@ -13,12 +13,12 @@
       "types": "./lib/index.d.ts"
     }
   },
-  "homepage": "https://pixijs.com/",
-  "bugs": "https://github.com/pixijs/extension-boilerplate/issues",
+  "homepage": "https://talhaozdemir.github.io/",
+  "bugs": "https://github.com/talhaozdemir/pixi-responsive/issues",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pixijs/extension-boilerplate.git"
+    "url": "https://github.com/talhaozdemir/pixi-responsive.git"
   },
   "scripts": {
     "start": "xs serve",

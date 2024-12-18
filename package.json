@@ -1,6 +1,6 @@
 {
   "name": "pixi-responsive",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Responsive plugin for PixiJS",
   "author": "Talha Özdemir",
   "main": "lib/index.js",

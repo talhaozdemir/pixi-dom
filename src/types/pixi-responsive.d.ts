@@ -1,4 +1,4 @@
-export * from "../Container";
+export * from "../HTMLContainer";
 export * from "../Responsive";
 
 declare global {

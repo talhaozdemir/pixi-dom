@@ -1,9 +1,9 @@
-import { Container } from "pixi-responsive";
+import { HTMLContainer } from "pixi-responsive";
 
 describe("HTMLContainer", () => {
   describe("initializeRootDiv", () => {
     it("should be added to prototype", () => {
-      const htmlContainer = new Container({
+      const htmlContainer = new HTMLContainer({
         debug: {
           enabled: false,
           color1: 0xffffff,

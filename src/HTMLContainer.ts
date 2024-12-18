@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
 import { HTMLContainerConfig } from "../global";
 
-export class Container extends PIXI.Container {
+export class HTMLContainer extends PIXI.Container {
 
   /**
   * This is a holder wrapper that contains HTML elements.

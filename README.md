@@ -1,6 +1,6 @@
 # PIXI Responsive Plugin
 
-<a href="https://pixi-dom.web.app/" target="_blank">LIVE DEMO</a>
+<a href="https://pixi-responsive.web.app/" target="_blank">LIVE DEMO</a>
 
 The **PIXI Responsive Plugin** is a powerful utility designed for developers who want to create responsive and dynamic layouts in PixiJS using HTML and CSS. By integrating DOM layout strategies directly into the PixiJS rendering pipeline, this plugin allows for seamless use of grid systems, alignment, scaling, and responsive design features within a PixiJS stage.
 
@@ -26,14 +26,15 @@ The **PIXI Responsive Plugin** is a powerful utility designed for developers who
 
 ### Installation
 
-Include the following script files in your project:
-
-```js
-import * as PixiResponsive from "./pixi-responsive.js";
-// import { Container, Responsive } from "./pixi-responsive"
+```sh
+npm install pixi-responsive
 ```
 
-Ensure that the `pixi-responsive.js` file is located in the correct path relative to your project directory.
+
+```js
+import { HTMLContainer, Responsive } from "pixi-responsive";
+// import * as PixiResponsive from "pixi-responsive";
+```
 
 ---
 
@@ -51,7 +52,7 @@ const { stage, renderer } = app;
 #### 2. Define the HTML and CSS Layout
 
 ```javascript
-const htmlCont = new PixiResponsive.Container({
+const htmlCont = new HTMLContainer({
   debug: {
     enabled: true,
     color1: 0x92b7d1,
@@ -139,7 +140,7 @@ gameArea.addChild(redBunny);
 #### 4. Enable Responsive Behavior
 
 ```javascript
-new PixiResponsive.Responsive(renderer, stage);
+new Responsive(renderer, stage);
 ```
 
 ---
@@ -159,16 +160,6 @@ blueBunny.resize = (w, h) => {
 ```
 
 ---
-
-## Debugging and Optimization
-
-### Debug Mode
-
-Enable debug mode to visualize layout areas and verify alignment:
-
-```javascript
-htmlCont.debug = { enabled: true, color1: 0x92b7d1, color2: 0x2d86c4 };
-```
 
 ### Performance Tips
 

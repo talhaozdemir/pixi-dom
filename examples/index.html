@@ -21,7 +21,7 @@
     <script src="https://pixijs.download/dev/pixi.min.js"></script>
     <script src="../dist/pixi-responsive.js"></script>
     <script type="module">
-      const { Container, Responsive } = PixiResponsive;
+      const { HTMLContainer, Responsive } = PixiResponsive;
 
       const app = new PIXI.Application();
       await app.init({ resizeTo: window, preference: "webgl", backgroundColor: 0x2c3e50 });
@@ -31,7 +31,7 @@
 
       // The plugin only needs HTML and CSS data! For example, a grid layout can be prepared and passed as prop.
       // Then Pixi Container gameobjects are prepared for each child of html data.
-      const htmlCont = new Container({
+      const htmlCont = new HTMLContainer({
         debug: {
           enabled: true,
           color1: 0x92b7d1,

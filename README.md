@@ -1,18 +1,20 @@
-# PIXI DOM Plugin
+# PIXI Responsive Plugin
 
 <a href="https://pixi-dom.web.app/" target="_blank">LIVE DEMO</a>
 
-The **PIXI DOM Plugin** is a powerful utility designed for developers who want to create responsive and dynamic layouts in PixiJS using HTML and CSS. By integrating DOM layout strategies directly into the PixiJS rendering pipeline, this plugin allows for seamless use of grid systems, alignment, scaling, and responsive design features within a PixiJS stage.
+The **PIXI Responsive Plugin** is a powerful utility designed for developers who want to create responsive and dynamic layouts in PixiJS using HTML and CSS. By integrating DOM layout strategies directly into the PixiJS rendering pipeline, this plugin allows for seamless use of grid systems, alignment, scaling, and responsive design features within a PixiJS stage.
 
 ## Features and Advantages
 
 ### Key Features
+
 - **HTML and CSS Integration**: Use standard HTML and CSS to define layouts and styles, eliminating the need for complex manual positioning.
 - **Responsive Design**: Handles resizing and orientation changes automatically, ensuring layouts adapt seamlessly to different screen sizes.
 - **Debugging Tools**: Built-in debug mode for visualizing grid layouts and container boundaries.
 - **Flexibility**: Supports both predefined resize behaviors and custom resize functions for fine-grained control.
 
 ### Advantages
+
 1. **Ease of Use**: Simplifies layout design with familiar HTML and CSS concepts.
 2. **Performance**: Leverages PixiJS’s GPU-accelerated rendering while maintaining lightweight, responsive designs.
 3. **Extensibility**: Allows custom resize logic for advanced use cases.
@@ -27,17 +29,18 @@ The **PIXI DOM Plugin** is a powerful utility designed for developers who want t
 Include the following script files in your project:
 
 ```js
-import * as PixiDOM from "./pixi-dom.js"
-// import { Container, Responsive } from "./pixi-dom"
+import * as PixiResponsive from "./pixi-responsive.js";
+// import { Container, Responsive } from "./pixi-responsive"
 ```
 
-Ensure that the `pixi-dom.js` file is located in the correct path relative to your project directory.
+Ensure that the `pixi-responsive.js` file is located in the correct path relative to your project directory.
 
 ---
 
 ### Basic Usage
 
 #### 1. Initialize the PixiJS Application
+
 ```javascript
 const app = new PIXI.Application();
 await app.init({ resizeTo: window, preference: "webgl", backgroundColor: 0x2c3e50 });
@@ -46,8 +49,9 @@ const { stage, renderer } = app;
 ```
 
 #### 2. Define the HTML and CSS Layout
+
 ```javascript
-const htmlCont = new PixiDOM.Container({
+const htmlCont = new PixiResponsive.Container({
   debug: {
     enabled: true,
     color1: 0x92b7d1,
@@ -93,6 +97,7 @@ stage.addChild(htmlCont);
 ```
 
 #### 3. Add Game Objects
+
 ```javascript
 const gameArea = htmlCont.getChildByLabel("game");
 const bunnyTexture = await PIXI.Assets.load("https://pixijs.com/assets/bunny.png");
@@ -105,35 +110,36 @@ redBunny.baseHeight = redBunny.texture.orig.height;
 
 redBunny.resizeData = {
   portrait: {
-    align: { 
-        x: "center", // left, center, right
-        y: "center"  // top, center, bottom
-    }, 
-    offset: { 
-        unit: "self", // px, pct, self
-        x: 0, 
-        y: 0 
+    align: {
+      x: "center", // left, center, right
+      y: "center", // top, center, bottom
     },
-    scale: { 
-        type: "relative", // absolute, relative
-        fit: "min", // min, max, stretch
-        x: 0.25, y: 
-        0.25 
+    offset: {
+      unit: "self", // px, pct, self
+      x: 0,
+      y: 0,
+    },
+    scale: {
+      type: "relative", // absolute, relative
+      fit: "min", // min, max, stretch
+      x: 0.25,
+      y: 0.25,
     },
   },
   landscape: {
     align: { x: "left", y: "top" },
     offset: { unit: "self", x: 0.5, y: 0.5 },
     scale: { type: "relative", fit: "min", x: 0.25, y: 0.25 },
-  },  
+  },
 };
 
 gameArea.addChild(redBunny);
 ```
 
 #### 4. Enable Responsive Behavior
+
 ```javascript
-new PixiDOM.Responsive(renderer, stage);
+new PixiResponsive.Responsive(renderer, stage);
 ```
 
 ---
@@ -141,7 +147,9 @@ new PixiDOM.Responsive(renderer, stage);
 ### Advanced Features
 
 #### Custom Resize Functions
+
 For complete control over resize behavior, you can define a custom resize function:
+
 ```javascript
 blueBunny.resize = (w, h) => {
   const wRatio = (w * 0.4) / blueBunny.baseWidth;
@@ -155,18 +163,22 @@ blueBunny.resize = (w, h) => {
 ## Debugging and Optimization
 
 ### Debug Mode
+
 Enable debug mode to visualize layout areas and verify alignment:
+
 ```javascript
 htmlCont.debug = { enabled: true, color1: 0x92b7d1, color2: 0x2d86c4 };
 ```
 
 ### Performance Tips
+
 - Minimize the complexity of HTML and CSS to improve rendering performance.
 - Use the `baseWidth` and `baseHeight` properties for all game objects to ensure proper scaling.
 
 ---
 
 ### Important: Define baseWidth and baseHeight Properties
+
 To ensure proper scaling and responsive behavior of game objects in your layout, it is crucial to define the baseWidth and baseHeight properties for each object. These properties determine the original dimensions of objects before any resizing or scaling occurs.
 
 ```javascript
@@ -181,7 +193,6 @@ redBunny.baseHeight = lb.height;
 
 Without these properties, your objects might not scale correctly, leading to unexpected behavior and layout issues. Always define baseWidth and baseHeight to guarantee that your game objects resize properly in all scenarios.
 
-
 ## Conclusion
-The PIXI DOM Plugin bridges the gap between traditional web layout techniques and PixiJS’s rendering capabilities. By leveraging familiar HTML and CSS workflows, developers can focus on creating visually rich, responsive designs with minimal effort. Whether you're building a game UI or a data visualization dashboard, this plugin offers a robust and scalable solution.
 
+The PIXI Responsive Plugin bridges the gap between traditional web layout techniques and PixiJS’s rendering capabilities. By leveraging familiar HTML and CSS workflows, developers can focus on creating visually rich, responsive designs with minimal effort. Whether you're building a game UI or a data visualization dashboard, this plugin offers a robust and scalable solution.

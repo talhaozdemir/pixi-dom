@@ -1,11 +1,11 @@
 {
-  "name": "pixi-dom",
+  "name": "pixi-responsive",
   "version": "1.0.0",
-  "description": "Utilizing the layout of DOM elements",
+  "description": "Responsive plugin for PixiJS",
   "author": "Talha Özdemir",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
-  "types": "src/types/pixi-dom.d.ts",
+  "types": "src/types/pixi-responsive.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.mjs",
@@ -50,9 +50,9 @@
     "@pixi/extension-scripts": "latest"
   },
   "extensionConfig": {
-    "namespace": "PixiDOM",
-    "bundle": "dist/pixi-dom.js",
-    "bundleModule": "dist/pixi-dom.mjs",
+    "namespace": "PixiResponsive",
+    "bundle": "dist/pixi-responsive.js",
+    "bundleModule": "dist/pixi-responsive.mjs",
     "globals": {
       "lodash": "_"
     }

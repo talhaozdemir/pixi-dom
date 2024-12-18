@@ -1,4 +1,4 @@
-import { Container } from "pixi-dom";
+import { Container } from "pixi-responsive";
 
 describe("HTMLContainer", () => {
   describe("initializeRootDiv", () => {

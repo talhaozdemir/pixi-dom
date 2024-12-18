@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PIXI Responsive</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html,
+      body {
+        user-select: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="https://pixijs.download/dev/pixi.min.js"></script>
+    <script src="../dist/pixi-responsive.js"></script>
+    <script type="module">
+      const { HTMLContainer, Responsive } = PixiResponsive;
+
+      const app = new PIXI.Application();
+      await app.init({ resizeTo: window, preference: "webgl", backgroundColor: 0x2c3e50 });
+      document.body.appendChild(app.canvas);
+
+      const { stage, renderer } = app;
+
+      // The plugin only needs HTML and CSS data! For example, a grid layout can be prepared and passed as prop.
+      // Then Pixi Container gameobjects are prepared for each child of html data.
+      const htmlCont = new HTMLContainer({
+        debug: {
+          enabled: true,
+          color1: 0x92b7d1,
+          color2: 0x2d86c4,
+        },
+        html: `
+        <div class="grid">
+            <div class="hud" style="grid-area: hud;">hud</div>
+            <div class="game" style="grid-area: game;">game</div>
+            <div class="ads" style="grid-area: ads;"></div>
+        </div>`,
+        css: `
+        @media (orientation: portrait) {
+          .grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-areas: 
+            "hud hud"
+            "game game"
+            "ads ads";
+            grid-template-rows: 128px 1fr 64px;
+            grid-template-columns: 1fr 6fr;
+          } 
+        }
+
+        @media (orientation: landscape) {
+          .grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-areas: 
+            "hud game"
+            "hud game"
+            "hud ads";
+            grid-template-rows: 128px 1fr 48px;
+            grid-template-columns: 2fr 6fr;
+          } 
+        }
+        `,
+      });
+      stage.addChild(htmlCont);
+
+      // If you want you can hide DOM
+      htmlCont.rootDiv.style.zIndex = -1;
+
+      // You can access created container objects with written class name or id of HTML elements.
+      const gameArea = htmlCont.getChildByLabel("game");
+      const hudArea = htmlCont.getChildByLabel("hud");
+      const adsArea = htmlCont.getChildByLabel("ads");
+
+      const bunnyTexture = await PIXI.Assets.load("https://pixijs.com/assets/bunny.png");
+
+      // Let's fill these containers with some other Pixi objects.
+      const redBunny = PIXI.Sprite.from(bunnyTexture);
+      redBunny.anchor.set(0.5);
+      redBunny.tint = 0xff0000;
+
+      // The plugin needs original size of gameobjects to handle resize operation correctly.
+      // We can access sprite's texture size and we have to prepare baseWidth and baseHeight properties with this size.
+      redBunny.baseWidth = redBunny.texture.orig.width;
+      redBunny.baseHeight = redBunny.texture.orig.height;
+
+      // // or we can calculate localBounds of the object and use it as base size.
+      // const redBunnyLocalBounds = redBunny.getLocalBounds();
+      // redBunny.baseWidth = redBunnyLocalBounds.width;
+      // redBunny.baseHeight = redBunnyLocalBounds.height;
+
+      // Don't forget to add object to it's parent.
+      gameArea.addChild(redBunny);
+
+      // Magic part is here, just play with properties and transform the object
+      redBunny.resizeData = {
+        portrait: {
+          align: {
+            x: "center", // left, center, right
+            y: "center", // top, center, bottom
+          },
+          offset: {
+            unit: "self", // px, pct, self
+            x: 0,
+            y: 0,
+          },
+          scale: {
+            type: "relative", // absolute, relative
+            fit: "min", // min, max, stretch
+            x: 0.25,
+            y: 0.25,
+          },
+        },
+      };
+
+      const greenBunny = PIXI.Sprite.from(bunnyTexture);
+      greenBunny.anchor.set(0.5);
+      greenBunny.tint = 0x00ff00;
+
+      greenBunny.baseWidth = greenBunny.texture.orig.width;
+      greenBunny.baseHeight = greenBunny.texture.orig.height;
+      hudArea.addChild(greenBunny);
+
+      greenBunny.resizeData = {
+        portrait: {
+          align: {
+            x: "right",
+            y: "center",
+          },
+          offset: {
+            unit: "self",
+            x: -0.5,
+            y: 0,
+          },
+          scale: {
+            type: "relative",
+            fit: "min",
+            x: 0.25,
+            y: 0.75,
+          },
+        },
+        landscape: {
+          align: {
+            x: "center",
+            y: "bottom",
+          },
+          offset: {
+            unit: "self",
+            x: 0,
+            y: -0.5,
+          },
+          scale: {
+            type: "relative",
+            fit: "min",
+            x: 0.4,
+            y: 0.25,
+          },
+        },
+      };
+
+      const blueBunny = PIXI.Sprite.from(bunnyTexture);
+      blueBunny.anchor.set(0.5);
+      blueBunny.tint = 0x0000ff;
+
+      blueBunny.baseWidth = blueBunny.texture.orig.width;
+      blueBunny.baseHeight = blueBunny.texture.orig.height;
+      hudArea.addChild(blueBunny);
+
+      // You can also write a custom resize function for an object
+      blueBunny.resize = (w, h) => {
+        const wRatio = (w * 0.4) / blueBunny.baseWidth;
+        const hRatio = (h * 0.5) / blueBunny.baseHeight;
+        blueBunny.scale.set(Math.min(wRatio, hRatio));
+
+        if (stage.baseWidth > stage.baseHeight) {
+          blueBunny.x = hudArea.baseWidth - blueBunny.width * 0.5;
+          blueBunny.y = blueBunny.height * 0.5;
+        } else {
+          blueBunny.x = blueBunny.width * 0.5;
+          blueBunny.y = blueBunny.height * 0.5;
+        }
+      };
+
+      const adsText = new PIXI.Text({
+        text: "ADS BANNER",
+        anchor: new PIXI.Point(0.5, 0.5),
+        fontSize: 64,
+      });
+      adsArea.addChild(adsText);
+
+      const lb = adsText.getLocalBounds();
+      adsText.baseWidth = lb.width;
+      adsText.baseHeight = lb.height;
+
+      adsText.resizeData = {
+        portrait: {
+          align: {
+            x: "center",
+            y: "center",
+          },
+          offset: {
+            unit: "self",
+            x: 0,
+            y: 0,
+          },
+          scale: {
+            type: "relative",
+            fit: "min",
+            x: 0.8,
+            y: 0.8,
+          },
+        },
+      };
+
+      // Responsive class is responsible for handling resize operations when each resize event occurs.
+      new Responsive(renderer, stage);
+    </script>
+  </body>
+</html>
